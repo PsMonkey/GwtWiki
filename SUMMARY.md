@@ -1,4 +1,4 @@
-* [GWT-Note](README.md)
+* [GWT Wiki](README.md)
 * GWT
 * [GXT](GXT/README.md)
 	* [Component](GXT/Component.md)
