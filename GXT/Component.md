@@ -171,6 +171,45 @@ ComboBox
 裡頭有 import `com.google.gwt.i18n.client.HasDirection.Direction`，
 可是這還是不科學阿阿阿...... Orz
 
+详细说明 `setTriggerAction()`、`setForceSelection()`、`setEditable()`、
+ `setSelectOnFocus()` 的作用和相互影响。
+
+* setTriggerAction()是否显示全部下拉框中全部内容。
+如果是 TriggerAction.QUERY，只能显示根据 ComboBox 内容筛选过后的内容。 
+如果是 TriggerAction.ALL，在输入的时候会筛选对应内容，
+但是在按下下拉框按钮的时候会显示全部内容。
+默认值：TriggerAction.QUERY
+
+* setForceSelect()是否允许 ComboBox 中的值不在下拉框中。
+如果是 true，ComboBox 输入的值不在下拉框中，lose focus 后会清空。
+（如果使用setValue()设定一个不在下拉框的输入值不会清空）
+默认值：false
+
+* setEditable()是否允许 ComboBox 中直接输入值。
+如果是 false，无法在 ComboBox 中直接输入值。
+默认值：true
+
+* setSelectOnFocus()是否在 focus 的时候出现反白的效果。
+如果是 true，会在 focus 的时候选中 ComboBox 中的值，出现反白的效果
+(只在鼠标点击的时候出现效果，松开后效果消失)，使用 Tab 键进入 ComboBox 不会出现这个效果。
+默认值：false
+
+* 打V表示符合描述。打X表示不符合描述。
+（包括使用 setValue() 的情况）
+
+| setTriggerAction()|setForceSelect()|setEditable()|setSelectOnFocus()|下拉框只显示 ComboBox 筛选过内容|允许 ComboBox 中的值不在下拉框中|允许 ComboBox 中输入值|在 focus 的时候不出现反白的效果|
+|:-----------------:|:--------------:|:-----------:|:----------------:|:------------------------------:|:-----------------------------:|:--------------------:|:-----------------------------:|
+|TriggerAction.QUERY|true |true |true |V|X|V|X|
+|TriggerAction.QUERY|true |true |false|V|X|V|V|
+|TriggerAction.QUERY|  X  |false|  X  |V|V|X|V|
+|TriggerAction.QUERY|false|true |true |V|V|V|X|
+|TriggerAction.QUERY|false|true |false|V|V|V|V|
+| TriggerAction.ALL |true |true |true |X|X|V|X|
+| TriggerAction.ALL |true |true |false|X|X|V|V|
+| TriggerAction.ALL |  X  |false|  X  |X|V|X|V|
+| TriggerAction.ALL |false|true |true |X|V|V|X|
+| TriggerAction.ALL |false|true |false|X|V|V|V|
+
 
 其他
 ====
