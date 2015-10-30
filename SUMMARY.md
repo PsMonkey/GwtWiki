@@ -1,6 +1,7 @@
 * [GWT Wiki](README.md)
 * [GWT](GWT/README.md)
 	* [Super Dev Mode](GWT/SDM.md)
+	* [Generator](GWT/Generator.md)
 * [GXT](GXT/README.md)
 	* [Component](GXT/Component.md)
 	* [DrawComponent](GXT/DrawComponent.md)
