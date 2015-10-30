@@ -1,5 +1,5 @@
 * [GWT Wiki](README.md)
-* GWT
+* [GWT](GWT/README.md)
 * [GXT](GXT/README.md)
 	* [Component](GXT/Component.md)
 	* [DrawComponent](GXT/DrawComponent.md)
