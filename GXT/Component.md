@@ -211,6 +211,48 @@ ComboBox
 | TriggerAction.ALL |false|true |false|X|V|V|V|
 
 
+DateField.getValue() 的回傳值如何决定的
+------------------------------------
+
+### 跳出DatePicker的情况 ###
+
+* 当 new 一个 `DateField` 时，就 new 了一个 `DateCell` 和一个 `DateTimePropertyEditor`；
+* 当使用者点击画面上的 `DateCell` 时，会通过 `DateCell.onTriggerClick()` 呼叫 `DateCell.expand()`，在这里 new 了一个 `DatePicker`；
+* 因为在 `DatePicker` 的 `Constructor` 中实现了 `sinkEvents()`，而且在 `onBrowserEvent()` 中实现了 `ONCLICK|ONMOUSEOVER` 等的具体操作，所以当画面上发生 ONCLICK Event 则会呼叫 `DatePicker.onClick(Event)`；
+
+`DatePicker` > today 的情况
+
+* 使用者在出现的 date picker 上点击【today】时，作 `addSelectHandler()` 让 select event 发生时去呼叫 `selectToday()`，结果呼叫 `DatePicker.setValue(Date, boolean)`，设置 `value` 的值；
+
+`DatePicker` > 点击任意日期的情况
+
+* 当使用者触发 ONCLICK Event 时，呼叫 `DatePicker.onClick(Event)`，若触发为当月的某一天则呼叫 `DatePicker.onDayClick(XElement)`；然后通过 `DatePicker.handleDateClick(XElement, String)` 呼叫 `DatePicker.setValue(Date, boolean)`，设置 `value` 的值；
+
+### 直接输入字符串的情况 ###
+
+* 当 new 一个 `DateField` 时，就 new 了一个 `DateTimePropertyEditor` 和一个 `DateCell`；
+* 当使用者在 text 中输入数据时，呼叫 `ValueBaseField.setValue(T)`，实际上是呼叫了 `CellComponent.setValue(C, boolean, boolean)`，在这里设置 `value` 的值；
+* (确实没有找到回到 `DatePicker.setValue()` 的地方，但确实这里应该会做 `resetTime()`，我也没有找到在什么时候做 `resetTime()` 的，/(ㄒoㄒ)/~~)
+
+
+DatePicker.setValue() 的处理
+---------------------------
+
+* 在 `DatePicker.setValue(date, true)` 的时候，执行 `this.value = new DateWrapper(date).resetTime()` 来指定日期的 00：00：00；
+* 其中 `resetTime()`，这个 method 中对 date 的 hours,minutes,seconds 都重新赋值，然后返回 Date
+	* `date.setHours(12)`;
+	* `date.setMinutes(0)`;
+	* `date.setSeconds(0)`;
+* 单独测试 new `DateWrapper(date).resetTime()` 结果显示 12：00：00
+
+
+为什么要这样做
+------------
+
+1. 为什么要一律指定时间：为了保持日期的统一性；
+2. 为什么指定日期的 00：00：00：因为是查看某一天而已，我们并不关心具体到几点几分几秒(而且使用者选定 2015-10-10 日期的具体时间没有人知道啊)，所以选择了一天当中最开始的时刻；
+
+
 其他
 ====
 
