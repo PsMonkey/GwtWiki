@@ -12,6 +12,10 @@ DrawComponent
 不然（似乎是在） resize 的時候，background 的 sprite 會莫名其妙跑到前面去，
 讓某些 sprite 被蓋掉、即使那些 sprite 給了很大的 z-index。
 
+`ImageSprite` 沒設定過座標，在視覺上會等同於在 (0, 0)。
+不過這會影響 `getBBox()` 回傳的座標仍然是 (Double.NaN, Double.NaN)，
+導致 `DrawComponent` 的 sprite handler 會無法觸發。
+其他 sprite 應該大同小異，所以簡單地說就是：「`Sprite` 都要設定座標」。
 
 
 Chart
