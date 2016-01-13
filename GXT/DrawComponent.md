@@ -7,9 +7,11 @@ DrawComponent
 另外還有隱藏實驗版（JavaDoc 找不到）的 `Canvas2d` 版。
 因為 wrapper 過，所以基本上可以不用理會底層實做，GXT 會提供一個一致的 API。
 
-目前單純顯示，可做出想要的效果。
-但是一旦搭配有 resize 機制的 GXT container（例如祖先有 `Viewport`），
-畫面上看起來就會一片空白（但是大小還在）... 還在追原因中 [淚目]
+目前建議都作 DrawComponent.setBackground(Color.NONE)，
+真的要 background 再自己指定一個 `RectangleSprite`。
+不然（似乎是在） resize 的時候，background 的 sprite 會莫名其妙跑到前面去，
+讓某些 sprite 被蓋掉、即使那些 sprite 給了很大的 z-index。
+
 
 
 Chart
