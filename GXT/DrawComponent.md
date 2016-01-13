@@ -18,6 +18,24 @@ DrawComponent
 其他 sprite 應該大同小異，所以簡單地說就是：「`Sprite` 都要設定座標」。
 
 
+判斷游標離開 DrawComponent
+--------------------------
+
+雖然游標仍然在 `DrawComponent` 上，不過如果上頭有多個 sprite，
+游標在離開 sprite 就會呼叫 `DrawComponent.onMouseOut()`。
+所以，要真正判斷游標是否離開 DrawCompont 的方法是
+
+```Java
+@Override
+public void onMouseOut(Event event) {
+	super.onMouseOut(event);
+
+	if (getElement().getBounds().contains(event.getClientX(), event.getClientY())) {
+		//表示還在 DrawComponent 內
+	}
+}
+```
+
 Chart
 =====
 
