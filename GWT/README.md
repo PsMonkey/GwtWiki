@@ -107,9 +107,18 @@ Overlay Type 的基礎是 `JavaScriptObject`。
 其他轉換 tip：
 
 * primitive type、enum（名稱一樣應該就 OK）可以直接轉換。
+* `Date` 轉換：
+
+	```Java
+	public final Date getFooDate() {
+		return DateTimeFormat.getFormat(PredefinedFormat.ISO_8601).parse(fooDate());
+	}
+	
+	private final native String fooDate() /*-{ return this.fooDate; }-*/;
+	```
 
 對一個 JSON 字串作 `JsonUtils.safeEval()` 就會得到 `JavaScriptObject` 或其子孫，端看泛型怎麼指定。
-後續呼叫 `JavaScript.Object.cast()` 也可以轉成想要的（繼承 JavaScriptObject）的 class。
+後續呼叫 `JavaScriptObject.cast()` 也可以轉成想要的（繼承 JavaScriptObject）的 class。
 
 
 #### 炸點 ####
