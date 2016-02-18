@@ -80,6 +80,38 @@ JSNI
 而是 host page 裡頭某個 iframe 裡頭的 `document`。
 這背後機制暫時不明... [死]
 
+在 JSNI 裡頭用 `[]` 產生一個 class array 作為回傳值，基本上是不可行，
+因為（以 Java 的觀點）缺乏 class 的資訊，而且到了執行期才會真正炸 cast 錯誤。
+目前找到最簡單的方法就是自己用 Java 重新包一次... ＝＝"，例如：
+
+```Java
+//目的：不是要取得整個 entry，而是只要 entry 裡頭的 resource
+
+public native FooJSO[] errorResult() /*-{
+	var result = [];
+	
+	for (var i = 0; i < this.entry.legnth; i++) {
+		result.push(this.entry[i].resource);
+	}
+	
+	return result;
+}-*/;
+
+// ======== //
+
+private final native Foo result(int index) /*-{ return this.entry[index].resource; }-*/;
+
+public List<FooJSO> getResult() {
+	ArrayList<FooJSO> result = new ArrayList<>();
+	
+	for (int i = 0; i < getSize(); i++) {
+		result.add(result(i));
+	}
+
+	return result;
+}
+```
+
 
 JSON 相關
 ---------
@@ -99,26 +131,30 @@ Overlay Type 的基礎是 `JavaScriptObject`。
 * `package` 等級的 class modifier
 * 有 `protected` 等級的 default constructor
 
+
 基本上不太需要宣告 field，主要是用 JSNI 的 getter：
 
-	public final native String getId() /*-{ return this.id; }-*/;
+```Java
+public final native String getId() /*-{ return this.id; }-*/;
+```
 
 
-其他轉換 tip：
+對一個 JSON 字串作 `JsonUtils.safeEval()` 就會得到 `JavaScriptObject` 或其子孫，端看泛型怎麼指定。
+後續呼叫 `JavaScriptObject.cast()` 也可以轉成想要的（繼承 JavaScriptObject）的 class。
+
+
+#### 轉換 tip ####
 
 * primitive type、enum（名稱一樣應該就 OK）可以直接轉換。
 * `Date` 轉換：
 
 	```Java
+	private final native String fooDate() /*-{ return this.fooDate; }-*/;
+	
 	public final Date getFooDate() {
 		return DateTimeFormat.getFormat(PredefinedFormat.ISO_8601).parse(fooDate());
 	}
-	
-	private final native String fooDate() /*-{ return this.fooDate; }-*/;
 	```
-
-對一個 JSON 字串作 `JsonUtils.safeEval()` 就會得到 `JavaScriptObject` 或其子孫，端看泛型怎麼指定。
-後續呼叫 `JavaScriptObject.cast()` 也可以轉成想要的（繼承 JavaScriptObject）的 class。
 
 
 #### 炸點 ####
