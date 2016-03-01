@@ -257,12 +257,15 @@ GWT 活跳跳的證據
 	* https://plus.google.com/+RayCromwell/posts/ivVepvxCu3g  
 		Ray Cromwell 列出使用 GWT 的 Google Product。
 * 2013 年：
-	* https://plus.google.com/+ThomasBroyer/posts/iCq9E2Wk3Jz
+	* https://plus.google.com/+ThomasBroyer/posts/iCq9E2Wk3Jz  
 		新版的 Google Drive 的 Sheet 使用 GWT 撰寫
 	* http://www.slideshare.net/cromwellian1/gwtcreate-keynote-san-francisco  
 		Ray Cromwell 在 Gwt.Create 報告 Google Drive 使用 GWT 撰寫的投影片（p.6）
 * 2014 年：
-	* https://news.ycombinator.com/item?id=8552296#up_8554339
+	* https://news.ycombinator.com/item?id=8552296#up_8554339  
 		Google Inbox、Google Calendar 是 GWT（70%）+ Closure（30%）
+* ？：https://bar.foo/docs.html  
+		詭異的 Google 官方網站，證實 Google Document 使用 GWT
+
 
 註：Ray Cromwell 是 Googler、現任 GWT 委員長。
