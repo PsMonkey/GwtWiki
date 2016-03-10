@@ -246,7 +246,9 @@ Image
 	new Image(imgResource.getSafeUri());	//OK
 ```
 
-	
+沒有 attach 就不會觸發 `LoadEvent`，不過即使 `setVisible(false)` 也沒關係。
+
+
 ______________________________________________________________________
 
 
