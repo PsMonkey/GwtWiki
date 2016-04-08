@@ -40,6 +40,16 @@ reference：
 * RPC： http://www.gwtproject.org/doc/latest/DevGuideServerCommunication.html#DevGuideSerializableTypes
 
 
+### client code 常見炸點 ###
+
+假設 `Foo` 是符合 RPC 規範的 class，`fooList` 是 `ArrayList<Foo>`，
+
+* Collections.unmodifiableList(fooList)
+* fooList.subList()
+
+上述是因為回傳值的 instance 的 class 不符合 RPC 規範，所以無法過 GWT RPC。
+
+
 雜項
 ----
 
