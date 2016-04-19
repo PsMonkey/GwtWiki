@@ -162,7 +162,13 @@ public final native String getId() /*-{ return this.id; }-*/;
 	private final native String fooDate() /*-{ return this.fooDate; }-*/;
 	
 	public final Date getFooDate() {
-		return DateTimeFormat.getFormat(PredefinedFormat.ISO_8601).parse(fooDate());
+		//JSON 的 datetime 標準據說是用 ISO-8601
+		//但是真的用這個 formate 卻無法處理如 "2012-12-21" 這種只有前半段符合的字串 ＝＝"
+		//return DateTimeFormat.getFormat(PredefinedFormat.ISO_8601).parse(fooDate());
+		
+		//所以... 直接用 Date constructor，底層實作是直接用 JS 解... Orz
+		return new String(fooDate());
+		//當然也可以直接寫在 JSNI 裡頭，不過寫起來好囉唆... [蓋牌]
 	}
 	```
 
