@@ -3,6 +3,7 @@
 	* [Super Dev Mode](GWT/SDM.md)
 	* [Generator](GWT/Generator.md)
 	* [瀏覽器差異](GWT/BrowserDiff.md)
+	* [相關工具](GWT/Tool.md)
 * [GXT](GXT/README.md)
 	* [Component](GXT/Component.md)
 	* [DrawComponent](GXT/DrawComponent.md)
