@@ -25,6 +25,7 @@ RPC（serializable）規範
 
 * 滿足 compatible 規範
 * implement `IsSerializable` 或是 `Serializable`
+* 如果是某個 class 的 inner class，則必須得是 static class（可以不是 public）
 * 有 default（沒有參數）constructor，任何 access modifier 均可（private 也無所謂）。
 	或是根本沒有任何 constructor。
 * 所有 field 都符合 RPC 原則。
