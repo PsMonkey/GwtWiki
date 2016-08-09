@@ -17,23 +17,21 @@ Project Setup
 	```XML
 	<dependency>
 		<groupId>com.sksamuel.jqm4gwt</groupId>
-		<artifactId>jqm4gwt-library</artifactId>
-		<version>1.4.6.Final</version>
-	</dependency>
-	<dependency>
-		<groupId>com.sksamuel.jqm4gwt</groupId>
 		<artifactId>jqm4gwt-standalone</artifactId>
 		<version>1.4.6.Final</version>
 		<scope>provided</scope>
 	</dependency>
+	<dependency>
+		<groupId>com.sksamuel.jqm4gwt</groupId>
+		<artifactId>jqm4gwt-library</artifactId>
+		<version>1.4.6.Final</version>
+	</dependency>
 	```
 
 	* 官方文件沒有特別註明要加 `jqm4gwt-library` 這個 dependency
-	* 官方文件上說
+	* `jqm4gwt-standalone` 一定要在 `jqm4gwt-library` 前面。
 	
 		> jqm4gwt-standalone must be the first in java build path order, before jqm4gwt-library
-		
-		不太確定他在講什麼，至少 dependency 沒有先後順序問題
 		
 1. `foo.gwt.xml` 當中加入
 
