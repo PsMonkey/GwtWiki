@@ -67,3 +67,12 @@ Project Setup
 1. （如果是後來才導入 jqm4gwt）清除 `/webapp/foo`
 1. 跑一次 `mvn install`，這樣產生 `/foo` 目錄中才會出現 `css`、`js` 的目錄。
 1. 把產生出來的 `/foo` 複製回 `/webapp/foo`
+
+
+另外，host page 的 `<head>` 要加上
+
+```XML
+<meta name="viewport" content="width=device-width, minimal-ui, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+```
+
+不然在 mobile device 上頭字體會超級小...... Orz
