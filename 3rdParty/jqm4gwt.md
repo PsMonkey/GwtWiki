@@ -5,6 +5,31 @@
 * repo：https://github.com/jqm4gwt/jqm4gwt
 
 
+Component
+=========
+
+均使用預設的 CSS。
+
+
+JQMList
+-------
+
+`clear()` 真的是全部清光光，items 跟 dividers 都要重新給。
+
+
+JQMListItem
+-----------
+
+![JQMListItem](image/JQMListItem.png)
+
+* `setImage()`、`setIcon()`、`setThumbnail()` 互斥。
+	都有作 `setImage()`，但是分別有不一樣的 CSS class 設定。
+	* `setIcon()` 的視覺效果好悽慘，這真的能用嗎？
+* 如果所屬的 `JQMList` 做了 `list.getElement().addClassName("jqm4gwt-list-static-item-img-right");`：
+	* `addSecondaryImage()` / `setSecondaryImage()` 會跟 `setCount()` 互斥。
+	* 只有最後一個 secondary image 會出現在右邊
+
+
 Project Setup
 =============
 
