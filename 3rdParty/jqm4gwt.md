@@ -69,10 +69,22 @@ Project Setup
 1. 把產生出來的 `/foo` 複製回 `/webapp/foo`
 
 
-另外，host page 的 `<head>` 要加上
+Host Page 調整
+--------------
+
+ ### head ###
+
+解決 mobile device 上頭字體會超級小的問題：
 
 ```XML
 <meta name="viewport" content="width=device-width, minimal-ui, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 ```
 
-不然在 mobile device 上頭字體會超級小...... Orz
+
+### body ###
+
+解決 Safari 無法正常顯示（Chrome / Firefox 都沒問題）：
+
+```XML
+<div data-role="page" id="start"></div>
+```
