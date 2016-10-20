@@ -148,6 +148,12 @@ HorizontalLayoutContainer / VerticalLayoutContainer
 ComboBox
 --------
 
+label 必須是 unique 的，
+這是因為 `ComboBox.getValue()` 會用當下的 `getText()` 去反找實際的 item instance，
+所以如果有兩個 item 是 label 是一樣的，
+會導致選第二個 item 後的 `getValue()` 還是得到第一個 item instance。
+以 UI 面來說，這是沒有問題的──使用者本來就無法分辨他到底是選到哪一個...... Orz
+
 `setTriggerAction(TriggerAction.ALL)` 可以在使用者再次要求下拉選單時顯示所有值。
 像 `TimeField` 就非常需要... Orz
 
