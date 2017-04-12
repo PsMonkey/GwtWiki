@@ -157,6 +157,7 @@ public final native String getId() /*-{ return this.id; }-*/;
 #### 轉換 tip ####
 
 * primitive type、enum（名稱一樣應該就 OK）可以直接轉換。
+	* 無法轉換 `long`，compiler 會報錯，用 `Long` 就沒問題
 * `Date` 轉換：
 
 	```Java
@@ -168,7 +169,7 @@ public final native String getId() /*-{ return this.id; }-*/;
 		//return DateTimeFormat.getFormat(PredefinedFormat.ISO_8601).parse(fooDate());
 		
 		//所以... 直接用 Date constructor，底層實作是直接用 JS 解... Orz
-		return new String(fooDate());
+		return new Date(fooDate());
 		//當然也可以直接寫在 JSNI 裡頭，不過寫起來好囉唆... [蓋牌]
 	}
 	```
