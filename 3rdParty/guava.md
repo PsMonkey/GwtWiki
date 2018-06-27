@@ -1,12 +1,12 @@
 ### gwt.xml 列表 ###
 
-以下均省略 `com.google.common.MODULE_NAME`
-（`Concurrent` 是省略 `com.google.com.util.concurrent`）。
+以下均省略 `com.google.common.MODULE_NAME`（全小寫），
+（`Concurrent` 是省略 `com.google.common.util.concurrent`）。
 
 * Annotations
 * Base
 	* Annotations
-* Catch
+* Cache
 	* Annotations
 	* Base
 	* Collect
@@ -47,6 +47,6 @@
 	* Base
 	* Escape
 
-要偷懶的話就 inherits `Catch` 可以涵蓋 75% 的 moudule，
+要偷懶的話就 inherits `Cache` 可以涵蓋 75% 的 moudule，
 只剩下 `Escape`、`Html`、`Net`、`Xml` 沒有包進去。
 或是可以考慮 `com.google.common.ForceGuavaCompilation` 這個 XD。
