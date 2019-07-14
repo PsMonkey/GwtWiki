@@ -141,6 +141,8 @@ Overlay Type 的基礎是 `JavaScriptObject`。
 
 * `package` 等級的 class modifier
 * 有 `protected` 等級的 default constructor
+* 不能有 instance field
+* 要嘛 class 宣告成 final，要嘛每個 method（即使不是 native）宣告成 final
 
 
 基本上不太需要宣告 field，主要是用 JSNI 的 getter：
@@ -149,13 +151,14 @@ Overlay Type 的基礎是 `JavaScriptObject`。
 public final native String getId() /*-{ return this.id; }-*/;
 ```
 
-
 對一個 JSON 字串作 `JsonUtils.safeEval()` 就會得到 `JavaScriptObject` 或其子孫，端看泛型怎麼指定。
 後續呼叫 `JavaScriptObject.cast()` 也可以轉成想要的（繼承 JavaScriptObject）的 class。
 
 
 #### 轉換 tip ####
 
+* 無法這樣用泛型 `public native <T> getField(String fieldName) /*-{ return this[fieldName]; }-*/;`，
+	執行時會炸 casting 錯誤...... ＝＝"
 * primitive type、enum（名稱一樣應該就 OK）可以直接轉換。
 	* 無法轉換 `long`，compiler 會報錯，用 `Long` 就沒問題
 * `Date` 轉換：
