@@ -145,7 +145,7 @@ Overlay Type 的基礎是 `JavaScriptObject`。
 * 要嘛 class 宣告成 final，要嘛每個 method（即使不是 native）宣告成 final
 
 
-基本上不太需要宣告 field，主要是用 JSNI 的 getter：
+主要是用 JSNI 的 getter：
 
 ```Java
 public final native String getId() /*-{ return this.id; }-*/;
@@ -157,10 +157,31 @@ public final native String getId() /*-{ return this.id; }-*/;
 
 #### 轉換 tip ####
 
-* 無法這樣用泛型 `public native <T> getField(String fieldName) /*-{ return this[fieldName]; }-*/;`，
-	執行時會炸 casting 錯誤...... ＝＝"
+* 務必在 production mode 作實際測試，會有 SDM 與 production mode 結果不同的情況。
+* 無法作 autoboxing
+	* 所以即使 `T` 給 primitive type 的 wrapper，
+		仍然無法用泛型 `public native <T> getField(String fieldName) /*-{ return this[fieldName]; }-*/;`。
 * primitive type、enum（名稱一樣應該就 OK）可以直接轉換。
 	* 無法轉換 `long`，compiler 會報錯，用 `Long` 就沒問題
+	* 但是這很容易導致一個炸點，在實際使用時還是有可能被當成字串，例如：
+	
+		```Java
+		public final native int fakeInt() /*-{
+			return this.foo == "" ? 0 : this.foo;
+		}-*/;
+		
+		public final native Integer realInt() /*-{
+			return @java.lang.Integer::valueOf(Ljava/lang/String;)(this.foo == "" ? "0" : this.foo);
+		}-*/;
+		
+		public final void test() {
+			Console.log((fakeInt() + 1) + " != " + (realInt() + 1));
+		}
+		```
+		
+		呼叫 `test()` 會得到如「11 != 2」這種結果。
+		所以保險起見還是統統 ~~拿去作雞精~~ 轉成標準 class instance。
+		**注意：** 只有 production mode 才會炸，SDM 結果正常。
 * `Date` 轉換：
 
 	```Java
