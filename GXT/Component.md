@@ -256,15 +256,28 @@ DateField
 Grid
 ----
 
-`setView(GridView)` 可以設定一些... 還不確定可以幹麼的東西 [喂喂]。
-其中 `GridView.setForceFit()`，如果設定 `true` 則 Grid 不會出現 scroll bar；
-若有多個 column、縮小其中一個 column，則其他 column 會變大補滿（不確定演算法）。
+### GridView ###
 
-`GridView` 還可以設定 `GridViewConfig`，藉此設定 row / column 的 style──
+`GridView.setForceFit()`，如果設定 `true` 則 Grid 不會出現橫向 scroll bar；
+沒有作 `setFixed(true)` 的 column 會依設定 width 為比例分配剩餘的寬度。
+
+`GridView` 可以設定 `GridViewConfig`，藉此設定 row / column 的 style──
 正確的說是加掛 style name。
+實務上很吃 CSS 技能所以不好用，還有導致其他 style 亂掉的風險。
+要處理 style 還是用 `ColumnConfig.setCell()`，
+在自訂的 cell 裡頭設計比較容易且影響範圍可控。
 
 可以透過 `GridView.getScroller()` 控制 `Grid` 的 scroll 狀態。
 當 `refresh()` 結束之後不想強制 scroll 回左上角，就必須得靠這招。
+
+
+#### GroupingView ####
+
+如果希望資料初次載入後呈現 collapse 的樣子，
+在操作完 store 之後對 view 作 `collapseAllGroups()` 是不正確的作法，
+因為之後只要再對 view 作 `refresh()`，
+原本沒有 expand 的 group 也會 expand。
+正確作法是在 grid 初始時作 `GroupingView.setStartCollapsed(true)`。
 
 
 ### AbstractGridEditing ###
