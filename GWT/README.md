@@ -80,10 +80,12 @@ JSNI
 
 	//host page script block
 	var value = "foo";
+	const wtf = "wtf";	//用 const 宣告會取不到值，原因不明...... Orz
 	
 	//in JSNI
 	$wnd.newGlobalArray = []; //JS 可以亂加 field 不要意外，延伸出來的 JS 哏這裡略過不提
 	$wnd.alert($wnd.value);	//alert 視窗的訊息會是「foo」
+	$wnd.alert($wnd.wtf);	//alert 視窗的訊息會是「undefine」
 
 
 `$doc` 是對應到 JS 的 `document`。
