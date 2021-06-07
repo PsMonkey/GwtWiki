@@ -34,8 +34,27 @@
 如果 method 名字改成不是 `add()` 就沒問題...... 
 
 
+browser event handling
+======================
+
++ `sinkEvents()` 傳入 component 打算處理的 event 代碼
+	（參見 `com.google.gwt.user.client.Event`）
++ override `onBrowserEvent()`（最好還是做 `super.onBrowserEvent()`
+
+如果要處理的是鍵盤輸入行為，照著做但是沒反應，
+試試看 `getElement().setTabIndex(0)`，
+參考自 GXT 的 `Menu`，原理不明... [遮臉]
+
+（上面這段其實跟 GXT 沒啥關係，都是 GWT 的哏。
+只是已經 N 年沒有用過 GWT 的 component 了，所以寫到這來 XD）
+
+另外 GXT 有一個 `KeyNav` 可以處理鍵盤輸入。
+但也不按照 `sinkEvents()` 的流程走，寫法也是各種 WTF，
+不要浪費時間用它 XD
+
+
 store & value provider
-=======================
+======================
 
 store 就是資料來源，value provider 就是決定顯示 vo 資料的方法
 
