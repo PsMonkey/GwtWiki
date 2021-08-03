@@ -45,6 +45,11 @@ Chart
 `NumericAxis.clear()`（實際是 `CartesianAxis.clear()`）不會清 fields，
 但是不清 fields 好像也不會怎樣？細節不明 Orz
 
+如果做了 `NumericAxis.setMaximum()` 等動作，
+則相關的 series 必須要設定正確的 `setYAxisPosition()`，
+否則會出現 series 跟 axis 對不上的各種靈異狀況。
+反之如果 axis 沒做、series 不用設定也不會出問題。
+
 
 TimerAxis
 ---------
