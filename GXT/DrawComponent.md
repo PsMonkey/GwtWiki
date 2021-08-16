@@ -68,6 +68,14 @@ TimerAxis
 前提觸發的條件又不是很 general，只好覆蓋新鮮的肝臟，結束這一回合 T__T。
 
 
+LineSeries
+----------
+
+預設情況下，若第 n 個點的值為 `Double.NaN`，
+則會直接連起 n - 1 跟 n + 1。
+設定 `setGapless(false)` 就會斷掉形成 gap。
+
+
 Legend
 ------
 
