@@ -12,6 +12,6 @@
 		* [chart.client.draw](GXT/trace/chart.client.draw.md)
 	* [瀏覽器差異](GXT/BrowserDiff.md)
 * 3rd Party
+	+ [gwt-jackson](3rdParty/gwt-jackson.md)
 	* [guava](3rdParty/guava.md)
 	* [jqm4gwt](3rdParty/jqm4gwt.md)
-	* [RestyGWT](3rdParty/RestyGWT.md)
